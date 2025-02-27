@@ -1,85 +1,118 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+<script>
+import FavoriteComponent from './components/FavoriteComponent.vue';
+import InputComponent from './components/InputComponent.vue';
+import Selector from './components/SelectorComponent.vue';
+import CryptoConvert from 'crypto-convert';
+
+const convert = new CryptoConvert();
+
+export default {
+  components: {InputComponent, Selector, FavoriteComponent},
+  data() {
+    return {
+      amount: 0,
+      cryptoSell: '',
+      cryptoBuy: '',
+      error: '',
+      result: 0,
+      resultString: '',
+      favs: []
+    }
+  },
+  methods: {
+    setCryptoSell(val) {
+      this.cryptoSell = val
+    },
+    setCryptoBuy(val) {
+      this.cryptoBuy = val
+    },
+    change() {
+      if(this.result != 0) {
+        alert("Вы успешно обменяли валюту!")
+      }
+    },
+    getFromFavs(index) {
+      this.cryptoSell = this.favs[index].from
+      this.cryptoBuy = this.favs[index].to
+    },
+    addToFavorite() {
+      this.favs.push({
+        from: this.cryptoSell,
+        to: this.cryptoBuy
+      })
+    },
+    async convert(val) {
+      this.amount = val
+      this.resultString = ''
+
+      if(this.amount <= 0) {
+        this.error = 'Число должно быть больше нуля'
+        return
+      } else if(this.cryptoSell == '' || this.cryptoBuy == '') {
+        this.error = 'Выберите валюту'
+        return
+      } else if(this.cryptoSell == this.cryptoBuy) {
+        this.error = 'Валюты не могут быть одинаковыми!'
+        return
+      }
+      this.error = ''
+
+      await convert.ready()
+      this.result = convert[this.cryptoSell][this.cryptoBuy](this.amount)
+      this.resultString = `${this.amount} ${this.cryptoSell} = ${this.result} ${this.cryptoBuy}`
+    }
+  }
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+  <h1>Crypto</h1>
+  <div class="selectors">
+    <Selector :setCrypto="setCryptoSell" :cryptoCurrent="cryptoSell"/>
+    <Selector :setCrypto="setCryptoBuy" :cryptoCurrent="cryptoBuy"/>
+  </div>
+  <button @click="addToFavorite()">В избранное</button>
+  <FavoriteComponent :favs="favs" v-if="favs.length > 0" :getFromFavs="getFromFavs"/>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <InputComponent :convert="convert"/>
+  <p class="result">{{ resultString }}</p>
+  <button @click="change()">Обменять</button>
+  <p class="error" v-if="error != 0">{{ error }}</p>
 </template>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+h1 {
+  margin-block: 50px;
+}
+.selectors {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin: auto;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.result {
+  padding: 20px;
+  min-height: 30px;
+  font-size: 20px;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
+.error {
+  color: red;
 }
 
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
+button {
+  border-radius: 3px;
   border: 0;
-}
+  padding: 10px 15px;
+  background-color: rgb(0, 94, 0);
+  color: rgb(255, 255, 255);
+  outline: none;
+  font-size: 1.5em;
 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
+  &:hover {
+    background-color: green;
   }
 }
+
 </style>
