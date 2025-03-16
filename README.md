@@ -1,41 +1,79 @@
-# crypto-changer
+# Crypto exchange
 
-This template should help get you started developing with Vue 3 in Vite.
+<a name="readme-top"></a>
 
-## Recommended IDE Setup
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="https://github.com/kilymax/vue-crypto-exchange">
+    <img src="/public/logo.jpg" alt="Logo" width="120">
+  </a>
+</div>
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#installation">Installation</a>
+    </li>
+    <li><a href="#contact">Contact</a></li>
+  </ol>
+</details>
 
-## Customize configuration
+<!-- ABOUT THE PROJECT -->
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+## About The Project
+Simple cryptocurrency Conversion App using Vue
 
-## Project Setup
+<!-- Demo video on YouTube [here](https://www.youtube.com/watch?v=zFkFrKvdz_w&list=PL4lVqWiqXeK15HICGgnRiJTThgfftHEyt&index=4) -->
 
-```sh
-npm install
-```
+You can also take a look at this app deployed on Vercel – [Crypto Exchange](https://vue-crypto-exchange.vercel.app/).
 
-### Compile and Hot-Reload for Development
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-```sh
-npm run dev
-```
+### Built With
 
-### Compile and Minify for Production
+- Vue 3
+- SCSS
+- BEM
+- Node.js (v20.9.0)
 
-```sh
-npm run build
-```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+<!-- GETTING STARTED -->
 
-```sh
-npm run test:unit
-```
+## Installation
 
-### Lint with [ESLint](https://eslint.org/)
+1. Clone the repo
+   ```sh
+   git clone https://github.com/kilymax/vue-crypto-exchange
+   ```
+2. Install dependencies
+   ```sh
+   npm install
+   ```
+3. Run app in dev mode
+   ```
+   npm run dev
+   ```
 
-```sh
-npm run lint
-```
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+
+## Contact
+
+Your Name - [Telegram](https://t.me/leoncox) - leon.coxsw@gmail.com
+
+Project Link: [Crypto Exchange](https://github.com/kilymax/vue-crypto-exchange)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+© 2025 GitHub, Inc.
